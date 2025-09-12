@@ -2,7 +2,7 @@ name: Generate GitHub-snake
 
 on:
   schedule:
-    - cron: '0 0 * * *'   # una vez al día (UTC) — cambia a tu preferencia
+    - cron: '0 0 * * *'  
   workflow_dispatch:
 
 permissions:
