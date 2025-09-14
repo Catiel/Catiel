@@ -1,0 +1,32 @@
+name: Generate GitHub-snake
+
+on:
+  schedule:
+    - cron: '0 0 * * *'   # una vez al día (UTC) — cambia a tu preferencia
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Generate snake images
+        uses: Platane/snk@v3
+        with:
+          github_user_name: Catiel
+          outputs: |
+            dist/github-snake.svg
+            dist/github-snake-dark.svg?palette=github-dark
+            dist/ocean.gif?color_snake=orange&color_dots=#bfd6f6,#8dbdff,#64a1f4,#4b91f1,#3c7dd9
+
+      - name: Commit generated files
+        uses: EndBug/add-and-commit@v9
+        with:
+          author_name: GitHub Actions
+          author_email: actions@github.com
+          message: Update generated snk images
